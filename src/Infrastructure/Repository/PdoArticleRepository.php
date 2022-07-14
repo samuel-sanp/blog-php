@@ -1,11 +1,14 @@
 <?php
 
-namespace SamuelConstantino\Infrastructure\Repository;
+namespace SamuelConstantino\BlogPhp\Infrastructure\Repository;
+require_once 'vendor/autoload.php';
+
 use SamuelConstantino\BlogPhp\Domain\Repository\ArticleRepository;
 use PDO;
 use PDOStatement;
 use SamuelConstantino\BlogPhp\Domain\Model\Article;
 use DateTimeImmutable;
+use Throwable;
 
 class PdoArticleRepository implements ArticleRepository
 {
@@ -22,10 +25,10 @@ class PdoArticleRepository implements ArticleRepository
 	 * @return array
 	 */
 	function getAll(): array {
-        $sql = "SELECT * FROM articles";
-        $stmt = $this->connection->query($sql);
+		$sql = "SELECT * FROM articles";
+		$stmt = $this->connection->query($sql);
 
-        return $this->hydrateArticleList($stmt);
+		return $this->hydrateArticleList($stmt);
 	}
 
     function hydrateArticleList(PDOStatement $stmt): array
@@ -49,6 +52,7 @@ class PdoArticleRepository implements ArticleRepository
 	 * @return array
 	 */
 	function getById(): array {
+		return [];
 	}
 	
 	/**
@@ -56,6 +60,7 @@ class PdoArticleRepository implements ArticleRepository
 	 * @return bool
 	 */
 	function create(): bool {
+		return false;
 	}
 	
 	/**
@@ -63,6 +68,7 @@ class PdoArticleRepository implements ArticleRepository
 	 * @return bool
 	 */
 	function update(): bool {
+		return false;
 	}
 	
 	/**
@@ -70,5 +76,6 @@ class PdoArticleRepository implements ArticleRepository
 	 * @return bool
 	 */
 	function remove(): bool {
+		return false;
 	}
 }

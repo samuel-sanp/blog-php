@@ -20,7 +20,7 @@ class Article
 	/**
 	 * @return ?int
 	 */
-	function getId(): ?int {
+	public function getId(): ?int {
 		return $this->id;
 	}
 	
@@ -28,14 +28,14 @@ class Article
 	 * @param ?int $id 
 	 * @return Article
 	 */
-	function setId(?int $id): self {
+	public function setId(?int $id): self {
 		$this->id = $id;
 		return $this;
 	}
 	/**
 	 * @return string
 	 */
-	function getTitle(): string {
+	public function getTitle(): string {
 		return $this->title;
 	}
 	
@@ -43,14 +43,14 @@ class Article
 	 * @param string $title 
 	 * @return Article
 	 */
-	function setTitle(string $title): self {
+	public function setTitle(string $title): self {
 		$this->title = $title;
 		return $this;
 	}
 	/**
 	 * @return string
 	 */
-	function getContent(): string {
+	public function getContent(): string {
 		return $this->content;
 	}
 	
@@ -58,7 +58,7 @@ class Article
 	 * @param string $content 
 	 * @return Article
 	 */
-	function setContent(string $content): self {
+	public function setContent(string $content): self {
 		$this->content = $content;
 		return $this;
 	}
