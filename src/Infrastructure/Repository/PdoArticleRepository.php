@@ -90,7 +90,11 @@ class PdoArticleRepository implements ArticleRepository
 	 *
 	 * @return bool
 	 */
-	function remove(Article $article): bool {
-		return false;
+	function remove(int $id): bool {
+		$sql = "DELETE FROM articles WHERE id = ?";
+		$stmt = $this->connection->prepare($sql);
+		$stmt->bindValue(1, $id, PDO::PARAM_INT);
+
+		return $stmt->execute();
 	}
 }

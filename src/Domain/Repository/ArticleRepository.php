@@ -9,5 +9,5 @@ interface ArticleRepository
     public function getById(int $id): Article;
     public function create(Article $article): bool;
     public function update(Article $article): bool;
-    public function remove(Article $article): bool;
+    public function remove(int $id): bool;
 }

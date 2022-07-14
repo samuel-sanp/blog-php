@@ -1,19 +1,21 @@
 <?php
 
-require_once '../config.php';
-require_once '../src/Artigo.php';
-require_once '../redireciona.php';
+use SamuelConstantino\BlogPhp\Infrastructure\Persistence\ConnectionCreator;
+use SamuelConstantino\BlogPhp\Infrastructure\Repository\PdoArticleRepository;
+
+require_once __DIR__.'/../vendor/autoload.php';
+require_once '../redirect.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try{
-        $artigo = new Artigo($mysql);
-        $artigo->remover($_POST['id']);
+    $connection = ConnectionCreator::createConnection();
+    $repository = new PdoArticleRepository($connection);
 
-        redireciona('index.php');
-    }
-    catch (Throwable $e) {
-        echo $e->getMessage();
-    }
+    $articles = $repository->remove($_POST['id']);
+
+    header("Location: index.php");
+    die();
+
+    // redirect('index.php');
 }
 
 ?>
