@@ -10,8 +10,9 @@ class Article
     private string $content;
     private DateTimeInterface $publicationDate;
 
-    public function __construct(string $title, $content, $publicationDate)
+    public function __construct(?int $id, string $title, $content, $publicationDate)
     {   
+        $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->publicationDate = $publicationDate;
