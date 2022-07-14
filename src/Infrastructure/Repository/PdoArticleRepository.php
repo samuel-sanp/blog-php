@@ -53,14 +53,21 @@ class PdoArticleRepository implements ArticleRepository
 	 */
 	public function getById(int $id): Article
 	{
-		$sql = "SELECT title, content, publication_date FROM articles WHERE id = ?";
+		$sql = "SELECT id, title, content, publication_date FROM articles WHERE id = ?";
 		$stmt = $this->connection->prepare($sql);
 		$stmt->bindValue(1, $id, PDO::PARAM_INT);
 		$stmt->execute();
 
-		$articles = $this->hydrateArticleList($stmt);
-
-		return $articles[0];
+		$articleData = $stmt->fetch();
+		
+		$article = new Article(
+			$articleData['id'],
+			$articleData['title'],
+			$articleData['content'],
+			new DateTimeImmutable($articleData['publication_date']),
+		);
+		
+		return $article;
 	}
 	
 	/**
