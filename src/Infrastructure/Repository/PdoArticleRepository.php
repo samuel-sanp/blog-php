@@ -1,7 +1,7 @@
 <?php
 
 namespace SamuelConstantino\BlogPhp\Infrastructure\Repository;
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/../../../vendor/autoload.php';
 
 use SamuelConstantino\BlogPhp\Domain\Repository\ArticleRepository;
 use PDO;

@@ -1,11 +1,9 @@
 <?php
 
 namespace SamuelConstantino\BlogPhp\Infrastructure\Persistence;
-require_once 'vendor/autoload.php';
 
 use PDO;
 use PDOException;
-use Throwable;
 
 class ConnectionCreator
 {
