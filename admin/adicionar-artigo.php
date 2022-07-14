@@ -1,19 +1,17 @@
 <?php
+use SamuelConstantino\BlogPhp\Infrastructure\Persistence\ConnectionCreator;
+use SamuelConstantino\BlogPhp\Infrastructure\Repository\PdoArticleRepository;
 
-require_once '../config.php';
-require_once '../src/Artigo.php';
-require_once '../redireciona.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try{
-        $artigo = new Artigo($mysql);
-        $artigo->adicionar($_POST['titulo'],$_POST['conteudo']);
+    $connection = ConnectionCreator::createConnection();
+    $repository = new PdoArticleRepository($connection);
 
-        redireciona('index.php');
-    }
-    catch (Throwable $e) {
-        echo $e->getMessage();
-    }
+    // $repository->;
+
+    header("Location: index.php");
+    die();
 }
 
 ?>

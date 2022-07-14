@@ -4,18 +4,15 @@ use SamuelConstantino\BlogPhp\Infrastructure\Persistence\ConnectionCreator;
 use SamuelConstantino\BlogPhp\Infrastructure\Repository\PdoArticleRepository;
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once '../redirect.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $connection = ConnectionCreator::createConnection();
     $repository = new PdoArticleRepository($connection);
 
-    $articles = $repository->remove($_POST['id']);
+    $repository->remove($_POST['id']);
 
     header("Location: index.php");
     die();
-
-    // redirect('index.php');
 }
 
 ?>
