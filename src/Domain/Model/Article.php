@@ -10,7 +10,7 @@ class Article
     private string $content;
     private DateTimeInterface $publicationDate;
 
-    public function __construct(?int $id, string $title, $content, $publicationDate)
+    public function __construct(?int $id, string $title, string $content, DateTimeInterface $publicationDate)
     {   
         $this->id = $id;
         $this->title = $title;
@@ -18,7 +18,7 @@ class Article
         $this->publicationDate = $publicationDate;
     }
 	/**
-	 * @return ?int
+	 * @return int
 	 */
 	public function getId(): ?int {
 		return $this->id;

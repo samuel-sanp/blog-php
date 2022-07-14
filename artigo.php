@@ -7,32 +7,30 @@ require_once 'vendor/autoload.php';
 
 $connection = ConnectionCreator::createConnection();
 $repository = new PdoArticleRepository($connection);
-$articles = $repository->getAll();
-
+$articleId = intval($_GET['id']);
+$article = $repository->getById($articleId);
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <title>Meu Blog</title>
+    <title>Artigo</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <div id="container">
-        <h1>Meu Blog</h1>
-        <?php foreach ($articles as $article) : ?>
-            <h2>
-                <a href="artigo.php?id=<?php echo $article->getId(); ?>">
-                    <?php echo $article->getTitle(); ?>
-                </a>
-            </h2>
-            <p>
-                <?php echo $article->getContent(); ?>
-            </p>
-        <?php endforeach; ?>
+        <h1>
+            <?php echo $article->getTitle() ?>
+        </h1>
+        <p>
+            <?php echo nl2br($article->getContent()) ?>
+        </p>
+        <div>
+            <a class="botao botao-block" href="index.php">Voltar</a>
+        </div>
     </div>
 </body>
 

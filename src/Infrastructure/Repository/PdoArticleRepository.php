@@ -8,7 +8,6 @@ use PDO;
 use PDOStatement;
 use SamuelConstantino\BlogPhp\Domain\Model\Article;
 use DateTimeImmutable;
-use Throwable;
 
 class PdoArticleRepository implements ArticleRepository
 {
@@ -24,17 +23,18 @@ class PdoArticleRepository implements ArticleRepository
 	 *
 	 * @return array
 	 */
-	function getAll(): array {
-		$sql = "SELECT * FROM articles";
+	public function getAll(): array
+	{
+		$sql = "SELECT id, title, content, publication_date FROM articles";
 		$stmt = $this->connection->query($sql);
 
 		return $this->hydrateArticleList($stmt);
 	}
 
-    function hydrateArticleList(PDOStatement $stmt): array
+    private function hydrateArticleList(PDOStatement $stmt): array
     {
         $articleDataList = $stmt->fetchAll();
-    
+
         $articleList = [];
         foreach ($articleDataList as $articleData) {
             $articleList[] = new Article(
@@ -49,17 +49,25 @@ class PdoArticleRepository implements ArticleRepository
 	
 	/**
 	 *
-	 * @return array
+	 * @return Article
 	 */
-	function getById(): array {
-		return [];
+	public function getById(int $id): Article
+	{
+		$sql = "SELECT title, content, publication_date FROM articles WHERE id = ?";
+		$stmt = $this->connection->prepare($sql);
+		$stmt->bindValue(1, $id, PDO::PARAM_INT);
+		$stmt->execute();
+
+		$articles = $this->hydrateArticleList($stmt);
+
+		return $articles[0];
 	}
 	
 	/**
 	 *
 	 * @return bool
 	 */
-	function create(): bool {
+	function create(Article $article): bool {
 		return false;
 	}
 	
@@ -67,7 +75,7 @@ class PdoArticleRepository implements ArticleRepository
 	 *
 	 * @return bool
 	 */
-	function update(): bool {
+	function update(Article $article): bool {
 		return false;
 	}
 	
@@ -75,7 +83,7 @@ class PdoArticleRepository implements ArticleRepository
 	 *
 	 * @return bool
 	 */
-	function remove(): bool {
+	function remove(Article $article): bool {
 		return false;
 	}
 }
