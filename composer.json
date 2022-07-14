@@ -1,5 +1,6 @@
 {
     "name": "samuel-constantino/blog-php",
+    "type": "project",
     "autoload": {
         "psr-4": {
             "SamuelConstantino\\BlogPhp\\": "src/"
