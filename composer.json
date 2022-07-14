@@ -1,0 +1,15 @@
+{
+    "name": "samuel-constantino/blog-php",
+    "autoload": {
+        "psr-4": {
+            "SamuelConstantino\\BlogPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "samuel-sanp",
+            "email": "samuel.junior@sanp.com.br"
+        }
+    ],
+    "require": {}
+}
